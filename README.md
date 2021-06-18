@@ -1,5 +1,8 @@
 # Image_to_PDF
 
+## Working on:
+Will convert this to an actual website with Django
+
 ## How it works:
 Simply drag and drop the folder with images to the bat file,    
 then enter the name for the pdf file when prompted.

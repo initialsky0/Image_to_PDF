@@ -1,0 +1,43 @@
+/* Normalization */
+html {
+   box-sizing: border-box;
+}
+
+body {
+   margin: 0;
+   background-color: whitesmoke;
+}
+
+/* Utilities */
+.sec-divider {
+   height: 5px;
+   width: 90vw;
+   margin: auto;
+   border-radius: 2.5px;
+   /* color would be changed later */
+   background: black;
+}
+
+/* Nav */
+.nav-container {
+   height: 100px;
+   padding: 0 2.5rem;
+   display: flex;
+   justify-content: space-between;
+   align-items: center;
+}
+
+ul.nav-items {
+   list-style: none;
+   padding: 0;
+   display: flex;
+}
+
+li.nav-item:not(:last-child) {
+   margin-right: 1rem;
+}
+
+/* Main Content */
+/* .main-container {
+   margin-top: 3rem;
+} */

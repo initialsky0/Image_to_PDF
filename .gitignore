@@ -1,7 +1,10 @@
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
 # virtual env and vs code setting
-/.venv
+/pdf_conv_venv/pyvenv.cfg
+/pdf_conv_venv/Include
+/pdf_conv_venv/Lib
+/pdf_conv_venv/Scripts
 /.vscode
 
 # material files
