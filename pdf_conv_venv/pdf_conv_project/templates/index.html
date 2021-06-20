@@ -1,10 +1,22 @@
 <!DOCTYPE html>
 {% extends "base.html" %}
+{% load svg %}
 {% block body_block %}
-    <h1>This is a temporary body.</h1>
-    <p>
-        Lorem, ipsum dolor sit amet consectetur adipisicing elit. Molestiae, perferendis 
-        laboriosam aspernatur incidunt tenetur consequuntur sequi maxime odit corrupti 
-        perspiciatis ipsa unde nam minima architecto at asperiores dignissimos quis? Ea.
-    </p>
+    <div class="home-container-item home-container-left">
+        <div class="home-text">
+            <h1>Welcome to PDF converter</h1>
+            <h3>Please choose the format you want to convert</h3>
+        </div>
+        <form class="home-form" method="POST">
+            <div class="home-form-select">
+                {{ form }}
+            </div>
+            {% csrf_token %}
+            <input type="submit" class="btn btn-primary" value="Submit">
+        </form>
+    </div>
+    <div class="home-container-item home-container-right">
+        <!-- icon resource: https://fontawesome.com , license: https://fontawesome.com/license -->
+        <div class="home-pdf-svg">{% svg 'file-pdf-regular' %}</div>
+    </div>
 {% endblock %}
