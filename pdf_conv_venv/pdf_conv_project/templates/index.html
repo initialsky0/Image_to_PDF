@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 {% extends "base.html" %}
 {% load svg %}
+{% load static %}
 {% block body_block %}
     <div class="home-container-item home-container-left">
         <div class="home-text">
@@ -10,13 +11,33 @@
         <form class="home-form" method="POST">
             <div class="home-form-select">
                 {{ form }}
+                <!-- {% for field in form %}
+                    <h1>{{ field.auto_id }}</h1>
+                    <h1>{{ field.name }}</h1>
+                {% endfor %} -->
+                
+                <!-- Custom select -->
+                <div class="custom-select-box">
+                    <span class="select-selected"></span>
+                    <!-- icon resource: https://fontawesome.com , license: https://fontawesome.com/license -->
+                    <span class="select-caret">{% svg 'caret-down-solid' %}</span>
+                </div>
+                <div class="custom-select-opt-container custom-select-opt-container-hide">
+                    <!-- {% if value == form.conversion_mode.value %}
+                        <p>check selected value {{ text }}</p>
+                    {% endif %} -->
+                    {% for value, text in form.conversion_mode.field.choices %}
+                        <div class="custom-select-opt" data-value="{{ value }}">{{ text }}</div>
+                    {% endfor %}
+                </div>
             </div>
             {% csrf_token %}
-            <input type="submit" class="btn btn-primary" value="Submit">
+            <input type="submit" class="btn btn-primary" value="Start converting">
         </form>
     </div>
     <div class="home-container-item home-container-right">
         <!-- icon resource: https://fontawesome.com , license: https://fontawesome.com/license -->
         <div class="home-pdf-svg">{% svg 'file-pdf-regular' %}</div>
     </div>
+    <script src="{% static 'js/custom-select.js' %}"></script>
 {% endblock %}
