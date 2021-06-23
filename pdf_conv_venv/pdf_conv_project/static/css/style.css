@@ -4,11 +4,14 @@
    --default-space: 2.5rem;
 
    /* Colors */
-   --primary-red-0: #EC1818;
-   --primary-red-d1: #DD3232;
    --pdf-red: #F40F02;
+   --primary-red-0: #EC1818;
+   --primary-red-l1: #eb5050;
+   --primary-red-d1: #DD3232;
    --secondary-cyan-0: #18ECEC;
    --secondary-cyan-l1: #5ff2f2;
+   --secondary-cyan-d1: #21c4ec;
+   --download-green: #33cc33;
    --black-0: #242828;
    --gray-0: #F0F0F0;
    --gray-d1: #8a9799;
@@ -79,6 +82,15 @@ h3 {
    background: var(--secondary-cyan-l1);
 }
 
+.btn-secondary{
+   color: var(--white-0);
+   background: var(--primary-red-0);
+}
+
+.btn-secondary:hover{
+   background: var(--primary-red-d1);
+}
+
 /* Nav */
 .nav-container {
    height: 100px;
@@ -86,6 +98,11 @@ h3 {
    display: flex;
    justify-content: space-between;
    align-items: center;
+}
+
+.nav-container a {
+   color: var(--black-0);
+   text-decoration: none;
 }
 
 ul.nav-items {
@@ -131,6 +148,7 @@ li.nav-item:not(:last-child) {
    overflow-y: auto;
    z-index: 1;
    transition: all .35s ease-in-out;
+   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
 }
 
 .custom-select-opt-container-show {
@@ -165,17 +183,29 @@ li.nav-item:not(:last-child) {
    align-items: center;
 }
 
-/*---------- Index homepage ----------*/
+/* Shared page styles */
+.download-container-item, 
+.convert-container-item, 
 .home-container-item {
    flex-basis: 50%;
 }
 
+.download-container-left, 
+.convert-container-left, 
 .home-container-left {
    height: 100%;
    display: flex;
    flex-direction: column;
    justify-content: space-evenly;
 }
+
+.download-container-right, 
+.convert-container-right, 
+.home-container-right {
+   height: 60%;
+}
+
+/*---------- Index homepage ----------*/
 
 .home-form-select {
    margin-bottom: var(--default-space);
@@ -193,10 +223,6 @@ li.nav-item:not(:last-child) {
    margin-top: .5rem;
 }
 
-.home-container-right {
-   height: 60%;
-}
-
 .home-pdf-svg {
    position: relative;
    margin: auto;
@@ -206,6 +232,111 @@ li.nav-item:not(:last-child) {
 }
 
 .home-pdf-svg:after {
+   /* Shadow effect resource https://www.cssportal.com/blog/10-image-shadows-using-css/ */
+   content:"";
+   position: absolute;
+   top: 75%;
+   bottom: -17%;
+   left: 0%;
+   right: 0%;
+   z-index:-2;
+
+   -webkit-box-shadow:0px 250px 25px -35px rgba(0,0,0,.15);
+   -moz-box-shadow:0px 250px 25px -35px rgba(0,0,0,.15);
+   box-shadow:0px 250px 25px -35px rgba(0,0,0,.15);
+
+   -webkit-border-radius:50%;
+   -moz-border-radius:50%;
+   border-radius:50%;
+   
+   transform:scaleY(.3);
+   -webkit-transform:scaleY(.3);
+   -moz-transform:scaleY(.3);
+   -ms-transform:scaleY(.3);
+   -o-transform:scaleY(.3);
+
+   animation: floating-shadow 2s ease-in-out infinite;
+}
+
+/*---------- Convert page ----------*/
+.convert-file-input {
+   display: flex;
+}
+
+.convert-file-input input[type="file"] {
+   display: none;
+}
+
+.convert-file-input > label {
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   margin-bottom: 1.5rem;
+}
+
+.convert-file-info {
+   margin-left: auto;
+}
+
+.convert-cyc-svg {
+   position: relative;
+   margin: auto;
+   width: 50%;
+   color: var(--secondary-cyan-d1);
+   animation: floating 2s ease-in-out infinite;
+}
+
+.convert-cyc-svg > svg {
+   animation: rotating-360 2s linear infinite;
+}
+
+.convert-cyc-svg:after {
+   /* Shadow effect resource https://www.cssportal.com/blog/10-image-shadows-using-css/ */
+   content:"";
+   position: absolute;
+   top: 75%;
+   bottom: -17%;
+   left: 0%;
+   right: 0%;
+   z-index:-2;
+
+   -webkit-box-shadow:0px 250px 25px -35px rgba(0,0,0,.15);
+   -moz-box-shadow:0px 250px 25px -35px rgba(0,0,0,.15);
+   box-shadow:0px 250px 25px -35px rgba(0,0,0,.15);
+
+   -webkit-border-radius:50%;
+   -moz-border-radius:50%;
+   border-radius:50%;
+   
+   transform:scaleY(.3);
+   -webkit-transform:scaleY(.3);
+   -moz-transform:scaleY(.3);
+   -ms-transform:scaleY(.3);
+   -o-transform:scaleY(.3);
+
+   animation: floating-shadow 2s ease-in-out infinite;
+}
+
+/*---------- Download page ----------*/
+.download-container-left .btn {
+   text-decoration: none;
+   color: unset;
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   min-width: 100px;
+   margin: 0 auto;
+}
+
+.download-cyc-svg {
+   position: relative;
+   margin: auto;
+   width: 50%;
+   color: var(--download-green);
+   animation: floating 2s ease-in-out infinite;
+}
+
+.download-cyc-svg:after {
    /* Shadow effect resource https://www.cssportal.com/blog/10-image-shadows-using-css/ */
    content:"";
    position: absolute;
@@ -271,4 +402,100 @@ li.nav-item:not(:last-child) {
       -moz-box-shadow:0px 250px 25px -35px rgba(0,0,0,.15);
       box-shadow:0px 250px 25px -35px rgba(0,0,0,.15);
    }
+}
+
+@keyframes rotating-360 {
+   0% {
+      transform: rotate(0deg);
+   }
+
+   100% {
+      transform: rotate(360deg);
+   }
+}
+
+/* Loading */
+.loading-container {
+   display: flex;
+   align-items: center;
+}
+
+.loading-container > span {
+   font-size: 24px;
+   font-weight: bold;
+}
+
+/* Loading element from loading.io, Modified for two color sphere */
+.lds-ellipsis {
+   display: inline-block;
+   position: relative;
+   width: 80px;
+   height: 80px;
+}
+
+.lds-ellipsis div {
+   position: absolute;
+   top: 33px;
+   width: 13px;
+   height: 13px;
+   border-radius: 50%;
+   animation-timing-function: cubic-bezier(0, 1, 1, 0);
+}
+
+.lds-c1 {
+   background-color: var(--primary-red-l1);
+}
+
+.lds-c2 {
+   background-color: var(--primary-red-d1);
+}
+
+.lds-ellipsis div:nth-child(1) {
+   left: 8px;
+   animation: lds-ellipsis1 0.6s infinite;
+}
+
+.lds-ellipsis div:nth-child(2) {
+   left: 8px;
+   animation: lds-ellipsis2 0.6s infinite;
+}
+
+.lds-ellipsis div:nth-child(3) {
+   left: 32px;
+   animation: lds-ellipsis2 0.6s infinite;
+}
+
+.lds-ellipsis div:nth-child(4) {
+   left: 56px;
+   animation: lds-ellipsis3 0.6s infinite;
+}
+
+@keyframes lds-ellipsis1 {
+   0% {
+      transform: scale(0);
+   }
+   100% {
+      transform: scale(1);
+   }
+}
+@keyframes lds-ellipsis3 {
+   0% {
+      transform: scale(1);
+   }
+   100% {
+      transform: scale(0);
+   }
+}
+@keyframes lds-ellipsis2 {
+   0% {
+      transform: translate(0, 0);
+   }
+   100% {
+      transform: translate(24px, 0);
+   }
+}
+
+/* Hidden */
+.hidden {
+   display: none;
 }

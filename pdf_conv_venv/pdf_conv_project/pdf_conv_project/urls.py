@@ -19,5 +19,7 @@ from pdf_conv_app import views
 
 urlpatterns = [
     path('', views.index, name='index'),
+    path('convert/<str:mode>/', views.convert, name='convert'),
+    path('download/<str:file_name>', views.download, name='download'),
     path('admin/', admin.site.urls),
 ]

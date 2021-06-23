@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+{% extends "base.html" %}
+{% load svg %}
+{% block body_block %}
+<div class="convert-container-item convert-container-left">
+    <div>
+        <h1>Converting from ... to ... (will change based on mode)</h1>
+        <h3>Please choose the file(s) you want to convert.</h3>
+    </div>
+    <!-- Require enctype to actually upload files -->
+    <form class="convert-form" method="POST" enctype="multipart/form-data">
+        <div class="convert-file-input">
+            {% for field in form %}
+                <label class="btn btn-primary" for="{{field.id_for_label}}">{{field.label}}</label>
+                {{ field }}
+            {% endfor %}
+            <p class="convert-file-info" data-singlefile="{{single_file}}">Selected file / Total files selected</p>
+        </div>
+        {% csrf_token %}
+        <input type="submit" class="btn btn-secondary" value="Start convert">
+    </form>
+    <div class="loading-container hidden">
+        <span>Converting</span>
+        <!-- Loading element css resource: https://loading.io/css/ -->
+        <div class="lds-ellipsis">
+            <!-- Modified for color -->
+            <div class="lds-c1"></div>
+            <div class="lds-c2"></div>
+            <div class="lds-c1"></div>
+            <div class="lds-c2"></div>
+        </div>
+    </div>
+</div>
+<div class="convert-container-item convert-container-right">
+    <!-- icon resource: https://fontawesome.com , license: https://fontawesome.com/license -->
+    <div class="convert-cyc-svg">{% svg 'sync-alt-solid' %}</div>
+</div>
+{% endblock %}
