@@ -23,3 +23,5 @@ urlpatterns = [
     path('download/<str:file_name>', views.download, name='download'),
     path('admin/', admin.site.urls),
 ]
+
+handler404 = 'pdf_conv_app.views.handler404'

@@ -14,7 +14,7 @@
                 <label class="btn btn-primary" for="{{field.id_for_label}}">{{field.label}}</label>
                 {{ field }}
             {% endfor %}
-            <p class="convert-file-info" data-singlefile="{{single_file}}">Selected file / Total files selected</p>
+            <p class="convert-file-info">Selected file / Total files selected</p>
         </div>
         {% csrf_token %}
         <input type="submit" class="btn btn-secondary" value="Start convert">

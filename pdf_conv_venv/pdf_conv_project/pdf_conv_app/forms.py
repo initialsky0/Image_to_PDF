@@ -1,12 +1,9 @@
 from django import forms
+from pdf_conv_app.utils.pdf_convert import CONVERT_MODE
 
 class ConvertSelectForm(forms.Form):
-    convert_option = (
-        ('test1', 'Test1'), 
-        ('test2', 'Test2'), 
-        ('test3', 'Test3'), 
-        ('test4', 'Test4'), 
-        ('test5', 'Test5'),
+    convert_option = tuple(
+        [(key, CONVERT_MODE[key]['description']) for key in CONVERT_MODE.keys()]
     )
     conversion_mode = forms.ChoiceField(
         required=True, 

@@ -33,15 +33,15 @@ body {
 }
 
 h1 {
-   font-size: 48px;
+   font-size: 3rem;
 }
 
 h2 {
-   font-size: 36px;
+   font-size: 2.5rem;
 }
 
 h3 {
-   font-size: 24px;
+   font-size: 1.5rem;
 }
 
 /* Utilities */
@@ -147,18 +147,18 @@ li.nav-item:not(:last-child) {
    border: 1px solid var(--gray-d1);
    overflow-y: auto;
    z-index: 1;
-   transition: all .35s ease-in-out;
+   transition: all .3s ease-in-out;
    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
 }
 
 .custom-select-opt-container-show {
    visibility: visible;
-   height: 150px;
+   max-height: 250px;
 }
 
 .custom-select-opt-container-hide {
    visibility: hidden;
-   height: 0px;
+   max-height: 0px;
 }
 
 .custom-select-opt-container .custom-select-opt {
@@ -184,12 +184,14 @@ li.nav-item:not(:last-child) {
 }
 
 /* Shared page styles */
+.not-found-container-item, 
 .download-container-item, 
 .convert-container-item, 
 .home-container-item {
    flex-basis: 50%;
 }
 
+.not-found-container-left, 
 .download-container-left, 
 .convert-container-left, 
 .home-container-left {
@@ -199,6 +201,7 @@ li.nav-item:not(:last-child) {
    justify-content: space-evenly;
 }
 
+.not-found-container-right, 
 .download-container-right, 
 .convert-container-right, 
 .home-container-right {
@@ -361,6 +364,50 @@ li.nav-item:not(:last-child) {
    -o-transform:scaleY(.3);
 
    animation: floating-shadow 2s ease-in-out infinite;
+}
+
+/*---------- 404 page ----------*/
+.not-found-svg {
+   position: relative;
+   margin: auto;
+   width: 50%;
+   color: var(--black-0);
+   animation: floating 2s ease-in-out infinite;
+}
+
+.not-found-svg:after {
+   /* Shadow effect resource https://www.cssportal.com/blog/10-image-shadows-using-css/ */
+   content:"";
+   position: absolute;
+   top: 75%;
+   bottom: -17%;
+   left: 0%;
+   right: 0%;
+   z-index:-2;
+
+   -webkit-box-shadow:0px 250px 25px -35px rgba(0,0,0,.15);
+   -moz-box-shadow:0px 250px 25px -35px rgba(0,0,0,.15);
+   box-shadow:0px 250px 25px -35px rgba(0,0,0,.15);
+
+   -webkit-border-radius:50%;
+   -moz-border-radius:50%;
+   border-radius:50%;
+   
+   transform:scaleY(.3);
+   -webkit-transform:scaleY(.3);
+   -moz-transform:scaleY(.3);
+   -ms-transform:scaleY(.3);
+   -o-transform:scaleY(.3);
+
+   animation: floating-shadow 2s ease-in-out infinite;
+}
+
+.not-found-svg-text {
+   position: absolute;
+   width: 100%;
+   height: 100%;
+   top: 0;
+   left: 0;
 }
 
 /* Animations */

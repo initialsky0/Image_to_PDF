@@ -7,7 +7,12 @@
         <h1>Your file is ready!</h1>
         <h3>Please download the file.</h3>
     </div>
-    <a class="btn btn-primary" href="{% url 'download' file_name %}?download={{file_exist}}">Download</a>
+    <a 
+        class="btn btn-primary" 
+        href="{% url 'download' file_name %}?download={{file_exist}}" 
+    >
+        Download my file
+    </a>
 </div>
 <div class="download-container-item download-container-right">
     <!-- icon resource: https://fontawesome.com , license: https://fontawesome.com/license -->
