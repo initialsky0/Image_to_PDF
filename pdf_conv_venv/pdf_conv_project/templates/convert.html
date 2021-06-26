@@ -16,18 +16,21 @@
             </span> you want to convert.
         </h3>
     </div>
-    <!-- Require enctype to actually upload files -->
-    <form class="convert-form" method="POST" action="{% url 'convert' mode %}" enctype="multipart/form-data">
-        <div class="convert-file-input">
-            {% for field in form %}
-                <label class="btn btn-primary" for="{{field.id_for_label}}">{{field.label}}</label>
-                {{ field }}
-            {% endfor %}
-            <p class="convert-file-info"></p>
-        </div>
-        {% csrf_token %}
-        <input type="submit" class="btn btn-secondary hide-btn" value="Start convert" disabled>
-    </form>
+    <div class="convert-form-container">
+        <p id="convert-error"></p>
+        <!-- Require enctype to actually upload files -->
+        <form class="convert-form" method="POST" action="{% url 'convert' mode %}" enctype="multipart/form-data">
+            <div class="convert-file-input">
+                {% for field in form %}
+                    <label class="btn btn-primary" for="{{field.id_for_label}}">{{field.label}}</label>
+                    {{ field }}
+                {% endfor %}
+                <p class="convert-file-info"></p>
+            </div>
+            {% csrf_token %}
+            <input type="submit" class="btn btn-secondary hide-btn" value="Start convert" disabled>
+        </form>
+    </div>
     <div class="loading-container hidden">
         <span>Converting</span>
         <!-- Loading element css resource: https://loading.io/css/ -->

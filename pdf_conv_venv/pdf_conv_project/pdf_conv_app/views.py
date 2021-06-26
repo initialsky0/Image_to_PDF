@@ -1,7 +1,7 @@
 from django.shortcuts import redirect, render
 from django.urls import reverse
 from django.conf import settings
-from django.http import Http404, JsonResponse, HttpResponseBadRequest
+from django.http import Http404, JsonResponse
 from pdf_conv_app import forms
 
 from threading import Timer
@@ -39,23 +39,28 @@ def convert(request, mode):
                 # upload_content.temporary_file_path()
                 # one file
                 upload_content = request.FILES['target_file']
-                file = convert_mode['convert_func']([upload_content], settings.MEDIA_DIR)
+                conv_result = convert_mode['convert_func']([upload_content], settings.MEDIA_DIR)
             else:
                 # else form is multi-files
                 upload_content = request.FILES.getlist('target_files')
-                file = convert_mode['convert_func'](upload_content, settings.MEDIA_DIR)
+                conv_result = convert_mode['convert_func'](upload_content, settings.MEDIA_DIR)
             
-            # Clean the file after 1 minute if file has a value
-            if(file):
-                Timer(60, lambda : util_files.clean_file(settings.MEDIA_DIR / file)).start()
-
-            return JsonResponse({ 
-                'redirectUrl': reverse('download', kwargs={ 'file_name': file }) 
-            })
+            if('path' in conv_result):
+                # if path key exist, clean the file after 1 minute and send redirect url to client
+                Timer(60, lambda : util_files.clean_file(conv_result['path'])).start()
+                return JsonResponse({ 
+                    'redirectUrl': reverse('download', kwargs={ 'file_name': conv_result['name'] }) 
+                })
+            elif('error' in conv_result):
+                # if error exist, send client error message with code 500
+                return JsonResponse({ 'error': conv_result['error'] }, status=500)
+            else:
+                # unexpected output from conv_result, should only happen for placeholder functions
+                return JsonResponse({ 'error': 'unknown error occurred' }, status=500)
         else:
-            return HttpResponseBadRequest()
-                
-    
+            # invalid form
+            return JsonResponse({ 'error': 'invalid form' }, status=400)
+            
     return render(request, 'convert.html', context={
         'form': form, 
         'mode': mode, 

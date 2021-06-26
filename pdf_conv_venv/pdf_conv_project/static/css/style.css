@@ -280,6 +280,11 @@ li.nav-item:not(:last-child) {
    justify-content: space-between;
 }
 
+#convert-error {
+   font-size: 1rem;
+   color: var(--primary-red-0);
+}
+
 .convert-file-info {
    margin: auto;
    max-width: 200px;

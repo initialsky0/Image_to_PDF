@@ -18,9 +18,7 @@ function prepFormdata(uploadFile) {
 
 // Send form data through fetch API
 function sendFormdata(uploadForm, formdata) {
-    const loadingComp = document.querySelector(".loading-container");
-    uploadForm.classList.add('hidden');
-    loadingComp.classList.remove('hidden');
+    dispLoading(uploadForm);
     fetch(
         uploadForm.getAttribute('action'), 
         {
@@ -35,13 +33,18 @@ function sendFormdata(uploadForm, formdata) {
             },
             body: formdata 
         }
-    ).then(res => {
-        if(res.ok) return res.json();
-    }).then(result =>{
+    ).then(
+        res => res.json()
+    ).then(result =>{
         if(result?.redirectUrl) {
             window.location.replace(result.redirectUrl);
         } else {
-            console.log('The form is invalid 403');
+            if(result?.error) {
+                const convError = document.getElementById('convert-error');
+                convError.textContent = result.error;
+                dispLoading(uploadForm, false);
+            }
+
         }
     }).catch(err => {
         console.log(err);
@@ -70,6 +73,23 @@ function dispSubmitBtn(uploadFile, show = true) {
         uploadBtn.classList.remove('show-btn');
         uploadBtn.disabled = true;
         infoText.textContent = 'No file selected';
+    }
+}
+
+// Function to show or hide loading, also reset form when hiding loading
+function dispLoading(uploadForm, show = true) {
+    const loadingComp = document.querySelector(".loading-container");
+    const formContainer = uploadForm.parentElement
+    if(show) {
+        // display loading component
+        formContainer.classList.add('hidden');
+        loadingComp.classList.remove('hidden');
+    } else {
+        // hide loading component
+        uploadForm.reset();
+        dispSubmitBtn(uploadForm[0], false);
+        loadingComp.classList.add('hidden');
+        formContainer.classList.remove('hidden');
     }
 }
 
