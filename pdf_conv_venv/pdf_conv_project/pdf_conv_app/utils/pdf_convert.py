@@ -25,17 +25,17 @@ def convImgToPdf(img_list, save_path):
 
 CONVERT_MODE = {
     'img_to_pdf': {
-        'description': 'Image(s) to PDF', 
+        'description': 'one or more images to PDF', 
         'multi_input': True, 
         'convert_func': convImgToPdf
     }, 
     'placeholder1': {
-        'description': 'Placeholder1', 
+        'description': 'placeholder1', 
         'multi_input': False, 
         'convert_func': print
     }, 
     'placeholder2': {
-        'description': 'Placeholder2', 
+        'description': 'placeholder2', 
         'multi_input': False, 
         'convert_func': print
     },

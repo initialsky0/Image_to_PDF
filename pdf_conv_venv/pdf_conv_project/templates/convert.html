@@ -1,23 +1,32 @@
 <!DOCTYPE html>
 {% extends "base.html" %}
+{% load static %}
 {% load svg %}
 {% block body_block %}
 <div class="convert-container-item convert-container-left">
     <div>
-        <h1>Converting from ... to ... (will change based on mode)</h1>
-        <h3>Please choose the file(s) you want to convert.</h3>
+        <h1>Converting from {{ cnv_desc }}</h1>
+        <h3>Please choose the 
+            <span>
+                {% if form.target_file %}
+                    file
+                {% else %}
+                    files
+                {% endif %}
+            </span> you want to convert.
+        </h3>
     </div>
     <!-- Require enctype to actually upload files -->
-    <form class="convert-form" method="POST" enctype="multipart/form-data">
+    <form class="convert-form" method="POST" action="{% url 'convert' mode %}" enctype="multipart/form-data">
         <div class="convert-file-input">
             {% for field in form %}
                 <label class="btn btn-primary" for="{{field.id_for_label}}">{{field.label}}</label>
                 {{ field }}
             {% endfor %}
-            <p class="convert-file-info">Selected file / Total files selected</p>
+            <p class="convert-file-info"></p>
         </div>
         {% csrf_token %}
-        <input type="submit" class="btn btn-secondary" value="Start convert">
+        <input type="submit" class="btn btn-secondary hide-btn" value="Start convert" disabled>
     </form>
     <div class="loading-container hidden">
         <span>Converting</span>
@@ -35,4 +44,5 @@
     <!-- icon resource: https://fontawesome.com , license: https://fontawesome.com/license -->
     <div class="convert-cyc-svg">{% svg 'sync-alt-solid' %}</div>
 </div>
+<script src="{% static 'js/convert-script.js' %}"></script>
 {% endblock %}

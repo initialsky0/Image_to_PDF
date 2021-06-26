@@ -27,7 +27,7 @@
                         <p>check selected value {{ text }}</p>
                     {% endif %} -->
                     {% for value, text in form.conversion_mode.field.choices %}
-                        <div class="custom-select-opt" data-value="{{ value }}">{{ text }}</div>
+                        <div class="custom-select-opt" data-value="{{ value }}">{{ text|capfirst }}</div>
                     {% endfor %}
                 </div>
             </div>

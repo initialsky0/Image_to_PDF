@@ -8,7 +8,7 @@ class ConvertSelectForm(forms.Form):
     conversion_mode = forms.ChoiceField(
         required=True, 
         choices=convert_option, 
-        label='Select conversion format:', 
+        label='Select conversion mode:', 
         # widget=forms.Select(attrs={ 'class': 'home-select-field' })
     )
 

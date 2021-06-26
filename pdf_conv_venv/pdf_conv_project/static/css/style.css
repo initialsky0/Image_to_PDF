@@ -65,6 +65,7 @@ h3 {
    font-size: 18px;
    font-weight: bold;
    letter-spacing: 1px;
+   backface-visibility: hidden;
 
    transition: all .2s;
 }
@@ -89,6 +90,18 @@ h3 {
 
 .btn-secondary:hover{
    background: var(--primary-red-d1);
+}
+
+.hide-btn {
+   visibility: hidden;
+   transform: translateX(-5%);
+   opacity: 0%;
+}
+
+.show-btn {
+   visibility: visible;
+   transform: translateX(0);
+   opacity: 100%;
 }
 
 /* Nav */
@@ -262,8 +275,15 @@ li.nav-item:not(:last-child) {
 }
 
 /*---------- Convert page ----------*/
-.convert-file-input {
+.convert-form {
    display: flex;
+   justify-content: space-between;
+}
+
+.convert-file-info {
+   margin: auto;
+   max-width: 200px;
+   text-align: center;
 }
 
 .convert-file-input input[type="file"] {

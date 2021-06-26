@@ -1,13 +1,12 @@
 from django.shortcuts import redirect, render
 from django.urls import reverse
 from django.conf import settings
-from django.http import Http404
+from django.http import Http404, JsonResponse, HttpResponseBadRequest
 from pdf_conv_app import forms
 
-from os import remove as clean_file
 from threading import Timer
 from pathlib import Path
-from pdf_conv_app.utils import util_response
+from pdf_conv_app.utils import util_response, util_files
 from pdf_conv_app.utils.pdf_convert import CONVERT_MODE
 
 # Create your views here.
@@ -15,9 +14,7 @@ def index(request):
     form = forms.ConvertSelectForm
     if request.method == 'POST' and form(request.POST).is_valid:
         # redirecting
-        return redirect(reverse(
-            'convert', 
-            kwargs={
+        return redirect(reverse('convert', kwargs={
                 'mode': request.POST['conversion_mode']
             }
         ))
@@ -48,28 +45,36 @@ def convert(request, mode):
                 upload_content = request.FILES.getlist('target_files')
                 file = convert_mode['convert_func'](upload_content, settings.MEDIA_DIR)
             
-            # Clean the file after 1 minute
-            Timer(60, lambda : clean_file(settings.MEDIA_DIR / file)).start()
-        return redirect('download', file_name=file)
+            # Clean the file after 1 minute if file has a value
+            if(file):
+                Timer(60, lambda : util_files.clean_file(settings.MEDIA_DIR / file)).start()
+
+            return JsonResponse({ 
+                'redirectUrl': reverse('download', kwargs={ 'file_name': file }) 
+            })
+        else:
+            return HttpResponseBadRequest()
                 
     
-    return render(request, 'convert.html', context={ 'form': form })
+    return render(request, 'convert.html', context={
+        'form': form, 
+        'mode': mode, 
+        'cnv_desc': convert_mode['description']
+        }
+    )
 
 def download(request, file_name):
     path = settings.MEDIA_DIR / file_name
     if(not Path.exists(path)):
         # file not found, raise 404 error
         raise Http404('file')
-    elif(request.GET.get('download') == 'true'):
+    elif(request.GET.get('download') == 'True'):
         # return download response
         return util_response.get_file_dl_res(path, file_name)
 
-    return render(
-        request, 
-        'download.html', 
-        context={ 
+    return render(request, 'download.html', context={ 
             'file_name': file_name, 
-            'file_exist': 'true' 
+            'file_exist': Path.exists(path) 
         }
     )
 

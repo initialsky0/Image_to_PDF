@@ -41,8 +41,9 @@ function selectOption(event) {
     if(event) {
         originalSelect.value = event.target.dataset.value;
     }
-    const selectedOption = originalSelect.querySelector(`option[value='${originalSelect.value}']`);
-    document.querySelector('.select-selected').textContent = selectedOption.textContent;
+    const selectedOptionText = originalSelect.querySelector(`option[value='${originalSelect.value}']`).textContent;
+    // Update selected box text with option selected description capitalized
+    document.querySelector('.select-selected').textContent = selectedOptionText.replace(/^.{1}/g, selectedOptionText[0].toUpperCase());
 }
 
 function initCustomSelect() {
