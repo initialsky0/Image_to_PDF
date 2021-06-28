@@ -64,7 +64,8 @@ def convert(request, mode):
     return render(request, 'convert.html', context={
         'form': form, 
         'mode': mode, 
-        'cnv_desc': convert_mode['description']
+        'cnv_desc': convert_mode['description'], 
+        'cnv_instruct': convert_mode['instruction']
         }
     )
 

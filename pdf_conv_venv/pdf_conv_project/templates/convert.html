@@ -6,15 +6,7 @@
 <div class="convert-container-item convert-container-left">
     <div>
         <h1>Converting from {{ cnv_desc }}</h1>
-        <h3>Please choose the 
-            <span>
-                {% if form.target_file %}
-                    file
-                {% else %}
-                    files
-                {% endif %}
-            </span> you want to convert.
-        </h3>
+        <h3>{{ cnv_instruct }}</h3>
     </div>
     <div class="convert-form-container">
         <p id="convert-error"></p>

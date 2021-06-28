@@ -34,6 +34,7 @@ def convImgToPdf(img_list, save_path):
 CONVERT_MODE = {
     'img_to_pdf': {
         'description': 'one or more images to PDF', 
+        'instruction': 'Please select one or more image files to convert to a PDF file. Page number is order by file name.',
         'multi_input': True, 
         'convert_func': convImgToPdf
     }, 
