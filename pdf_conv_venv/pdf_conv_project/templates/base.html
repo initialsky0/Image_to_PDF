@@ -13,30 +13,16 @@
         <div class="nav-container">
             <h1 class="nav-logo"><a href="{% url 'index' %}" class="nav-home">logo</a></h1>
             <ul class="nav-items">
-                <li class="nav-item">
-                    <h3>item 1</h3>
-                    <ul class="nav-dropdown-container">
-                        <li><a href="#" class="nav-dropdown-link">1</a></li>
-                        <li><a href="#" class="nav-dropdown-link">2</a></li>
-                        <li><a href="#" class="nav-dropdown-link">3</a></li>
-                    </ul>
-                </li>
-                <li class="nav-item">
-                    <h3>item 2</h3>
-                    <ul class="nav-dropdown-container">
-                        <li><a href="#" class="nav-dropdown-link">1</a></li>
-                        <li><a href="#" class="nav-dropdown-link">2</a></li>
-                        <li><a href="#" class="nav-dropdown-link">3</a></li>
-                    </ul>
-                </li>
-                <li class="nav-item">
-                    <h3>item 3</h3>
-                    <ul class="nav-dropdown-container">
-                        <li><a href="#" class="nav-dropdown-link">1</a></li>
-                        <li><a href="#" class="nav-dropdown-link">2</a></li>
-                        <li><a href="#" class="nav-dropdown-link">3</a></li>
-                    </ul>
-                </li>
+                {% for key, value in nav_categories.items %}
+                    <li class="nav-item">
+                        <h3>{{ key|capfirst }}</h3>
+                        <ul class="nav-dropdown-container">
+                            {% for path, title in value.items %}
+                                <li><a href="{% url 'convert' path %}" class="nav-dropdown-link">{{ title|capfirst }}</a></li>
+                            {% endfor %}
+                        </ul>    
+                    </li>
+                {% endfor %}
             </ul>
         </div>
     </nav>

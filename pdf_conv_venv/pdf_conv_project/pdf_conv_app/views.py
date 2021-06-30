@@ -18,7 +18,7 @@ def index(request):
                 'mode': request.POST['conversion_mode']
             }
         ))
-    return render(request, 'index.html', context={'form': form})
+    return render(request, 'index.html', context={ 'form': form })
 
 def convert(request, mode):
     convert_mode = CONVERT_MODE[mode]

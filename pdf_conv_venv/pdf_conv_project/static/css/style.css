@@ -1,4 +1,4 @@
-/* Variables */
+/* --- Variables --- */
 :root {
    /* Spacing */
    --default-space: 2.5rem;
@@ -19,7 +19,7 @@
 
 }
 
-/* Normalization */
+/* --- Normalization --- */
 html {
    box-sizing: border-box;
 }
@@ -44,7 +44,7 @@ h3 {
    font-size: 1.5rem;
 }
 
-/* Utilities */
+/* --- Utilities --- */
 .sec-divider {
    height: 5px;
    width: 90%;
@@ -53,7 +53,7 @@ h3 {
    background: var(--black-0);
 }
 
-/* Buttons */
+/* --- Buttons --- */
 .btn {
    cursor: pointer;
    border: none;
@@ -104,7 +104,7 @@ h3 {
    opacity: 100%;
 }
 
-/* Nav */
+/* --- Nav --- */
 .nav-container {
    height: 100px;
    padding: 0 var(--default-space);
@@ -134,8 +134,10 @@ h3 {
    align-items: center;
    position: absolute;
    top: 100%;
-   left: -20%;
-   width: 150%;
+   /* center the container */
+   left: 50%;
+   transform: translateX(-50%);
+   width: auto;
    background: var(--white-0);
    border-radius: 5px;
    visibility: hidden;
@@ -151,8 +153,21 @@ h3 {
 .nav-dropdown-container li a {
    display: block;
    padding: .5rem 2rem;
-   transition: filter .3s;
    text-align: center;
+   text-decoration: none;
+   white-space: nowrap;
+   color: var(--black-0);
+   transition: background-color .3s;
+}
+
+.nav-dropdown-container li:first-child a {
+   border-top-left-radius: 5px;
+   border-top-right-radius: 5px;
+}
+
+.nav-dropdown-container li:last-child a {
+   border-bottom-left-radius: 5px;
+   border-bottom-right-radius: 5px;
 }
 
 .nav-dropdown-container li a:hover {
@@ -168,10 +183,10 @@ h3 {
 }
 
 li.nav-item:not(:last-child) {
-   margin-right: 1rem;
+   margin-right: 2rem;
 }
 
-/* Custom Select */
+/* --- Custom Select --- */
 .custom-select-box {
    cursor: pointer;
    width: 300px;
@@ -231,7 +246,7 @@ li.nav-item:not(:last-child) {
    background-color: var(--gray-0);
 }
 
-/* Main Content */
+/* --- Main Content --- */
 .main-container {
    margin: 0 var(--default-space);
    height: 80%;
@@ -239,7 +254,7 @@ li.nav-item:not(:last-child) {
    align-items: center;
 }
 
-/* Shared page styles */
+/* --- Shared page styles --- */
 .not-found-container-item, 
 .download-container-item, 
 .convert-container-item, 
@@ -478,7 +493,7 @@ li.nav-item:not(:last-child) {
    left: 0;
 }
 
-/* Animations */
+/* --- Animations --- */
 @keyframes floating {
    0% {
       transform: translateY(0%);
@@ -529,7 +544,7 @@ li.nav-item:not(:last-child) {
    }
 }
 
-/* Loading */
+/* --- Loading --- */
 .loading-container {
    display: flex;
    align-items: center;
@@ -610,7 +625,7 @@ li.nav-item:not(:last-child) {
    }
 }
 
-/* Hidden */
+/* --- Hidden --- */
 .hidden {
    display: none;
 }
