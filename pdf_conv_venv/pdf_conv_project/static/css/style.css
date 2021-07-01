@@ -113,6 +113,10 @@ h3 {
    align-items: center;
 }
 
+.nav-logo svg {
+   width: 45%;
+}
+
 .nav-dropdown-item a {
    color: var(--black-0);
    text-decoration: none;

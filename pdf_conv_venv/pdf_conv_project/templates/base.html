@@ -1,4 +1,5 @@
 {% load static %}
+{% load svg %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -11,7 +12,16 @@
 <body>
     <nav>
         <div class="nav-container">
-            <h1 class="nav-logo"><a href="{% url 'index' %}" class="nav-home">logo</a></h1>
+            <div class="nav-logo">
+                <!-- 
+                    logo created in https://www.namecheap.com/. 
+                    font-name: Karla-Regular, font-author: Jonny Pinhorn. 
+                    icon-designer: Javier Cabezas
+                -->
+                <a href="{% url 'index' %}" class="nav-home">
+                    {% svg 'logo' %}
+                </a>
+            </div>
             <ul class="nav-items">
                 {% for key, value in nav_categories.items %}
                     <li class="nav-item">
