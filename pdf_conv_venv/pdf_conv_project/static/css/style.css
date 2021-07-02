@@ -633,3 +633,23 @@ li.nav-item:not(:last-child) {
 .hidden {
    display: none;
 }
+
+/* --- Media Query --- */
+@media only screen and (max-width: 1600px) {
+   body {
+      height: 650px;
+      background: linear-gradient(rgba(236, 24, 24, 0.26) 0%, rgba(236, 24, 24, 0.05) 19%, white 100%) no-repeat;
+
+   }
+
+   .home-pdf-svg, 
+   .convert-cyc-svg, 
+   .download-cyc-svg,
+   .not-found-svg {
+      width: 45%;
+   }
+
+   .custom-select-opt-container-show {
+      max-height: 150px;
+   }
+}
