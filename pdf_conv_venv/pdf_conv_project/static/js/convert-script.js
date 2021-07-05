@@ -1,3 +1,27 @@
+// Validate upload files, can expand if needed
+function validateContent(uploadFile, sizeLimit) {
+    const targetFiles = uploadFile.files;
+    let validate = false;
+
+    // will toggle validate if condition below is true.
+    // check if blob has content, and blob size is within size limit
+    if(targetFiles.length) {
+        // if sizeLimit not specified, return true bc there is no size Limit
+        // this code can be relocated if other validation on file is required
+        if(!sizeLimit) return true;
+        let fileSize = 0;
+        for(let i=0; i < targetFiles.length; i++) {
+            // validate or get info for each file in the blob
+            fileSize += targetFiles[i].size;
+        }
+        if(fileSize <= (sizeLimit * (10 ** 6))) {
+            validate = true;
+        }
+    }
+    
+    return validate;
+}
+
 // Prepare form data
 function prepFormdata(uploadFile) {
     const targetFile = uploadFile.files;
@@ -72,7 +96,7 @@ function dispSubmitBtn(uploadFile, show = true) {
     } else {
         uploadBtn.classList.remove('show-btn');
         uploadBtn.disabled = true;
-        infoText.textContent = 'No file selected';
+        infoText.textContent = 'Upload limit: 25 MB';
     }
 }
 
@@ -109,10 +133,13 @@ function onFileUpload() {
 
 // Function handling when user selected what file/files to upload
 function onFileSelected(event) {
-    if(event.target.files.length) {
+    const fileValidation = validateContent(event.target, 25);
+    if(fileValidation) {
         dispSubmitBtn(event.target);
     } else {
         dispSubmitBtn(event.target, false);
+        // alert user files not valid
+        alert('Selected files does not meet the requirements for upload. Please check if the upload content is within the upload limit and has the correct file format.');
     }
 }
 
